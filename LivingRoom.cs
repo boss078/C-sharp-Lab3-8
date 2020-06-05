@@ -13,15 +13,7 @@ namespace Task1
 		: base(Id, aArea, aPeopleAmount)
 		{
 			HasTV = aHasTV;
-			PrintLogEvent += new LogHandler(() =>
-			{
-				if (this.HasTV)
-					Console.WriteLine("Created living room object with id " + this.Id + " and area "
-						+ this.Area + " and " + this.PeopleAmount + " people and TV inside");
-				else
-					Console.WriteLine("Created living room object with id " + this.Id + " and area "
-						+ this.Area + " and " + this.PeopleAmount + " people and without any TV inside");
-			});
+			PrintLog($"Room created with id: {Id} and area {aArea} and {aPeopleAmount} peoples inside with Tv {aHasTV}");
 		}
 		public new void PrintInfo()
 		{

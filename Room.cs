@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Task1
 {
-	public delegate void LogHandler();
+	public delegate void LogHandler(string message);
 	class Room
 	{
 		protected int Id { get; private set; }
@@ -16,16 +16,13 @@ namespace Task1
 		public Room(int Id)
 		{
 			this.Id = Id;
-			PrintLogEvent += new LogHandler(() => { Console.WriteLine("Created room object with id " + this.Id); });
+			PrintLog($"Room created with id: {Id}");
 		}
 		public Room(int Id, int aArea)
 		{
 			this.Id = Id;
 			Area = aArea;
-			PrintLogEvent += new LogHandler(() => {
-				Console.WriteLine("Created room object with id "
-					+ this.Id + " and area " + this.Area);
-			});
+			PrintLog($"Room created with id: {Id} and area {aArea}");
 		}
 		public void PrintInfo()
 		{
@@ -35,10 +32,10 @@ namespace Task1
 			Console.WriteLine("Area: " + this.Area);
 			Console.WriteLine();
 		}
-		public void PrintLog()
+		public void PrintLog(string message)
 		{
 			Console.WriteLine("Logs:");
-			PrintLogEvent?.Invoke();
+			PrintLogEvent?.Invoke(message);
 			Console.WriteLine("~~~~~~~~~~~~~~~~~~");
 		}
 	}

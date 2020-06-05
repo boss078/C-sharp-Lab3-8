@@ -15,14 +15,14 @@ namespace Task1
 			HabitableRoom habitableRoom1 = new HabitableRoom(rnd.Next(1000), 23, 1);
 			LivingRoom livingRoom1 = new LivingRoom(rnd.Next(1000), 422, 10, true);
 			LivingRoom livingRoom2 = new LivingRoom(rnd.Next(1000), 5, 0, false);
+			room1.PrintLogEvent += new LogHandler((string message) => { Console.WriteLine(message); });
+			habitableRoom1.PrintLogEvent += new LogHandler((string message) => { Console.WriteLine(message); });
+			livingRoom1.PrintLogEvent += new LogHandler((string message) => { Console.WriteLine(message); });
+			livingRoom2.PrintLogEvent += new LogHandler((string message) => { Console.WriteLine(message); });
 			room1.PrintInfo();
-			room1.PrintLog();
 			habitableRoom1.PrintInfo();
-			habitableRoom1.PrintLog();
 			livingRoom1.PrintInfo();
-			livingRoom1.PrintLog();
 			livingRoom2.PrintInfo();
-			livingRoom2.PrintLog();
 			Console.ReadKey(true);
 		}
 	}

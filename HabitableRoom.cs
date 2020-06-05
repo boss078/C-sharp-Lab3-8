@@ -13,10 +13,7 @@ namespace Task1
 		public HabitableRoom(int Id, int aArea, int aPeopleAmount) : base(Id, aArea)
 		{
 			PeopleAmount = aPeopleAmount;
-			PrintLogEvent += new LogHandler(() => {
-				Console.WriteLine("Created habitable room object with id " + this.Id + " and area "
-					+ this.Area + " and " + this.PeopleAmount + " people inside");
-			});
+			PrintLog($"Room created with id: {Id} and area {aArea} and {aPeopleAmount} peoples inside");
 		}
 		public new void PrintInfo()
 		{
