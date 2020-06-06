@@ -8,12 +8,26 @@ namespace Task1
 {
 	class HabitableRoom : Room
 	{
-		protected int PeopleAmount { get; set; } = 1;
+		protected int peopleAmount;
+		public int PeopleAmount {
+			get { return this.peopleAmount; }
+			set
+			{
+				if (value >= 0)
+				{
+					this.peopleAmount = value;
+					PrintMessage($"People amount changed to {this.peopleAmount}");
+				}
+				else
+				{
+					PrintMessage($"People amount was not changed, because value={value} < 0");
+				}
+			}
+		}
 
 		public HabitableRoom(int Id, int aArea, int aPeopleAmount) : base(Id, aArea)
 		{
 			PeopleAmount = aPeopleAmount;
-			PrintLog($"Room created with id: {Id} and area {aArea} and {aPeopleAmount} peoples inside");
 		}
 		public new void PrintInfo()
 		{

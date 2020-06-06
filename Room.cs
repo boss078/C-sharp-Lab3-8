@@ -1,28 +1,42 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Task1
 {
-	public delegate void LogHandler(string message);
+	public delegate void MessageHandler(string message);
 	class Room
 	{
 		protected int Id { get; private set; }
-		public event LogHandler PrintLogEvent;
+		public event MessageHandler PrintMessageEvent;
 
-		public int Area { get; set; } = 10;
+		protected int area;
+		public int Area { get { return this.area; }
+			set
+			{
+				if(value >= 0)
+                {
+					this.area = value;
+					PrintMessage($"Area changed to {this.area}");
+                }
+				else
+                {
+					PrintMessage($"Area was not changed, because value={value} < 0");
+				}
+			}
+		}
 		public Room(int Id)
 		{
 			this.Id = Id;
-			PrintLog($"Room created with id: {Id}");
+			this.Area = 10;
 		}
 		public Room(int Id, int aArea)
 		{
 			this.Id = Id;
 			Area = aArea;
-			PrintLog($"Room created with id: {Id} and area {aArea}");
 		}
 		public void PrintInfo()
 		{
@@ -32,11 +46,14 @@ namespace Task1
 			Console.WriteLine("Area: " + this.Area);
 			Console.WriteLine();
 		}
-		public void PrintLog(string message)
+		public void PrintMessage(string message)
 		{
-			Console.WriteLine("Logs:");
-			PrintLogEvent?.Invoke(message);
-			Console.WriteLine("~~~~~~~~~~~~~~~~~~");
+			if (PrintMessageEvent != null)
+			{
+				Console.WriteLine("Message:");
+				PrintMessageEvent.Invoke(message);
+				Console.WriteLine("~~~~~~~~~~~~~~~~~~");
+			}
 		}
 	}
 }

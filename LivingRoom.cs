@@ -8,12 +8,20 @@ namespace Task1
 {
 	class LivingRoom : HabitableRoom
 	{
-		protected bool HasTV { get; set; } = false;
+		protected bool hasTV;
+		public bool HasTV
+		{
+			get { return this.hasTV; }
+			set
+			{
+				this.hasTV = value;
+				PrintMessage($"Has TV changed to {this.hasTV}");
+			}
+		}
 		public LivingRoom(int Id, int aArea, int aPeopleAmount, bool aHasTV)
 		: base(Id, aArea, aPeopleAmount)
 		{
 			HasTV = aHasTV;
-			PrintLog($"Room created with id: {Id} and area {aArea} and {aPeopleAmount} peoples inside with Tv {aHasTV}");
 		}
 		public new void PrintInfo()
 		{

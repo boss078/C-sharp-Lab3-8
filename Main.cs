@@ -8,21 +8,31 @@ namespace Task1
 {
 	class Program
 	{
+		static void printMessageToConsole(string message)
+        {
+			Console.WriteLine(message);
+        }
 		static void Main(string[] args)
 		{
 			Random rnd = new Random();
-			Room room1 = new Room(rnd.Next(1000), 40);
-			HabitableRoom habitableRoom1 = new HabitableRoom(rnd.Next(1000), 23, 1);
-			LivingRoom livingRoom1 = new LivingRoom(rnd.Next(1000), 422, 10, true);
-			LivingRoom livingRoom2 = new LivingRoom(rnd.Next(1000), 5, 0, false);
-			room1.PrintLogEvent += new LogHandler((string message) => { Console.WriteLine(message); });
-			habitableRoom1.PrintLogEvent += new LogHandler((string message) => { Console.WriteLine(message); });
-			livingRoom1.PrintLogEvent += new LogHandler((string message) => { Console.WriteLine(message); });
-			livingRoom2.PrintLogEvent += new LogHandler((string message) => { Console.WriteLine(message); });
-			room1.PrintInfo();
-			habitableRoom1.PrintInfo();
-			livingRoom1.PrintInfo();
-			livingRoom2.PrintInfo();
+			Room room = new Room(rnd.Next(1000), 40);
+			HabitableRoom habitableRoom = new HabitableRoom(rnd.Next(1000), 23, 1);
+			LivingRoom livingRoom = new LivingRoom(rnd.Next(1000), 422, 10, true);
+			room.PrintMessageEvent += printMessageToConsole;
+			habitableRoom.PrintMessageEvent += printMessageToConsole;
+			livingRoom.PrintMessageEvent += printMessageToConsole;
+			room.PrintInfo();
+			room.Area = 15;
+			room.Area = -4;
+			room.PrintInfo();
+			habitableRoom.PrintInfo();
+			habitableRoom.PeopleAmount = 5;
+			habitableRoom.PeopleAmount = -3;
+			habitableRoom.PrintInfo();
+			livingRoom.PrintInfo();
+			livingRoom.HasTV = false;
+			livingRoom.Area = -2;
+			livingRoom.PrintInfo();
 			Console.ReadKey(true);
 		}
 	}
